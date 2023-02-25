@@ -1,0 +1,1 @@
+web: gunicorn main:app #Rodar o app do arquivo main (arquivo principal)
