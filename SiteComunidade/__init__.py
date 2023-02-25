@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import os
+import SQLAlchemy
 
 
 app = Flask(__name__)
@@ -20,5 +21,14 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Favor realizar o login para a página ser liberada'
 login_manager.login_message_category = 'alert-info'
 
+from SiteComunidade import models
+engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+if not engine.has_table("usuario"):
+    with app.app_context():
+        database.drop_all()
+        database.create_all()
+        print("Base de dados criada com sucesso!")
+else:
+    print("Base de dados já existente")
 
 from SiteComunidade import routes
