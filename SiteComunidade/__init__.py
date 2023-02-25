@@ -24,12 +24,9 @@ login_manager.login_message_category = 'alert-info'
 from SiteComunidade import models
 
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-if not engine.has_table("usuario"):
-    with app.app_context():
-        database.drop_all()
-        database.create_all()
-        print("Base de dados criada com sucesso!")
-else:
-    print("Base de dados já existente")
+with app.app_context():
+    database.drop_all()
+    database.create_all()
+    print("Base de dados criada com sucesso!")
 
 from SiteComunidade import routes
